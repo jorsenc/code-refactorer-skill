@@ -1,0 +1,60 @@
+{
+    "hyperedges":  [
+
+                   ],
+    "output_tokens":  1000,
+    "input_tokens":  0,
+    "edges":  [
+
+              ],
+    "nodes":  [
+                  {
+                      "label":  "Code Refactorer Skill",
+                      "source_file":  "SKILL.md",
+                      "id":  "skill_code_refactorer",
+                      "file_type":  "rationale"
+                  },
+                  {
+                      "label":  "6-Phase Execution Model",
+                      "source_file":  "CLAUDE.md",
+                      "id":  "six_phase_model",
+                      "file_type":  "rationale"
+                  },
+                  {
+                      "label":  "Code Smells Reference (50+ patterns)",
+                      "source_file":  "references/code-smells.md",
+                      "id":  "code_smells_ref",
+                      "file_type":  "document"
+                  },
+                  {
+                      "label":  "Design Patterns Reference",
+                      "source_file":  "references/design-patterns.md",
+                      "id":  "design_patterns_ref",
+                      "file_type":  "document"
+                  },
+                  {
+                      "label":  "Metrics Reference",
+                      "source_file":  "references/metrics.md",
+                      "id":  "metrics_ref",
+                      "file_type":  "document"
+                  },
+                  {
+                      "label":  "Test Cases (6 validation scenarios)",
+                      "source_file":  "test-cases.json",
+                      "id":  "test_cases_json",
+                      "file_type":  "document"
+                  },
+                  {
+                      "label":  "Validation Script",
+                      "source_file":  "scripts/validate.py",
+                      "id":  "validation_script",
+                      "file_type":  "code"
+                  },
+                  {
+                      "label":  "Documentation-Driven Architecture",
+                      "source_file":  "CLAUDE.md",
+                      "id":  "doc_philosophy_driven",
+                      "file_type":  "rationale"
+                  }
+              ]
+}

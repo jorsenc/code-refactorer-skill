@@ -1,0 +1,157 @@
+{
+    "hyperedges":  [
+                       {
+                           "id":  "phase_collection",
+                           "label":  "Six Execution Phases",
+                           "confidence_score":  1,
+                           "nodes":  [
+                                         "six_phase_model"
+                                     ],
+                           "relation":  "participate_in",
+                           "confidence":  "EXTRACTED"
+                       }
+                   ],
+    "output_tokens":  1000,
+    "input_tokens":  0,
+    "edges":  [
+                  {
+                      "confidence":  "EXTRACTED",
+                      "target":  "six_phase_model",
+                      "confidence_score":  1,
+                      "source":  "skill_code_refactorer",
+                      "relation":  "implements"
+                  },
+                  {
+                      "confidence":  "EXTRACTED",
+                      "target":  "analysis_legibility",
+                      "confidence_score":  1,
+                      "source":  "six_phase_model",
+                      "relation":  "references"
+                  },
+                  {
+                      "confidence":  "EXTRACTED",
+                      "target":  "analysis_maintainability",
+                      "confidence_score":  1,
+                      "source":  "six_phase_model",
+                      "relation":  "references"
+                  },
+                  {
+                      "confidence":  "EXTRACTED",
+                      "target":  "analysis_performance",
+                      "confidence_score":  1,
+                      "source":  "six_phase_model",
+                      "relation":  "references"
+                  },
+                  {
+                      "confidence":  "EXTRACTED",
+                      "target":  "analysis_security",
+                      "confidence_score":  1,
+                      "source":  "six_phase_model",
+                      "relation":  "references"
+                  },
+                  {
+                      "confidence":  "EXTRACTED",
+                      "target":  "code_smells_ref",
+                      "confidence_score":  1,
+                      "source":  "analysis_legibility",
+                      "relation":  "references"
+                  },
+                  {
+                      "confidence":  "EXTRACTED",
+                      "target":  "metrics_ref",
+                      "confidence_score":  1,
+                      "source":  "analysis_maintainability",
+                      "relation":  "references"
+                  },
+                  {
+                      "confidence":  "EXTRACTED",
+                      "target":  "design_patterns_ref",
+                      "confidence_score":  1,
+                      "source":  "skill_code_refactorer",
+                      "relation":  "references"
+                  },
+                  {
+                      "confidence":  "EXTRACTED",
+                      "target":  "test_cases_json",
+                      "confidence_score":  1,
+                      "source":  "skill_code_refactorer",
+                      "relation":  "references"
+                  },
+                  {
+                      "confidence":  "EXTRACTED",
+                      "target":  "validation_script",
+                      "confidence_score":  1,
+                      "source":  "skill_code_refactorer",
+                      "relation":  "references"
+                  },
+                  {
+                      "confidence":  "EXTRACTED",
+                      "target":  "doc_philosophy_driven",
+                      "confidence_score":  1,
+                      "source":  "skill_code_refactorer",
+                      "relation":  "rationale_for"
+                  }
+              ],
+    "nodes":  [
+                  {
+                      "label":  "Code Refactorer Skill",
+                      "id":  "skill_code_refactorer",
+                      "file_type":  "rationale"
+                  },
+                  {
+                      "label":  "6-Phase Execution Model",
+                      "id":  "six_phase_model",
+                      "file_type":  "rationale"
+                  },
+                  {
+                      "label":  "Code Smells Reference",
+                      "id":  "code_smells_ref",
+                      "file_type":  "document"
+                  },
+                  {
+                      "label":  "Design Patterns Reference",
+                      "id":  "design_patterns_ref",
+                      "file_type":  "document"
+                  },
+                  {
+                      "label":  "Metrics Reference",
+                      "id":  "metrics_ref",
+                      "file_type":  "document"
+                  },
+                  {
+                      "label":  "Test Cases",
+                      "id":  "test_cases_json",
+                      "file_type":  "document"
+                  },
+                  {
+                      "label":  "Validation Script",
+                      "id":  "validation_script",
+                      "file_type":  "code"
+                  },
+                  {
+                      "label":  "Legibility Analysis",
+                      "id":  "analysis_legibility",
+                      "file_type":  "rationale"
+                  },
+                  {
+                      "label":  "Maintainability Analysis",
+                      "id":  "analysis_maintainability",
+                      "file_type":  "rationale"
+                  },
+                  {
+                      "label":  "Performance Analysis",
+                      "id":  "analysis_performance",
+                      "file_type":  "rationale"
+                  },
+                  {
+                      "label":  "Security Analysis",
+                      "id":  "analysis_security",
+                      "file_type":  "rationale"
+                  },
+                  {
+                      "label":  "Documentation-Driven Architecture",
+                      "id":  "doc_philosophy_driven",
+                      "file_type":  "rationale"
+                  }
+              ]
+}

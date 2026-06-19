@@ -1,0 +1,98 @@
+{
+  "communities": {
+    "0": [
+      "analysis_legibility",
+      "analysis_maintainability",
+      "analysis_performance",
+      "analysis_security",
+      "code_smells_ref",
+      "metrics_ref",
+      "six_phase_model"
+    ],
+    "1": [
+      "design_patterns_ref",
+      "doc_philosophy_driven",
+      "skill_code_refactorer",
+      "test_cases_json",
+      "validation_script"
+    ],
+    "2": [
+      "claude_settings_local_json",
+      "claude_settings_local_permissions",
+      "claude_settings_local_permissions_allow"
+    ],
+    "3": [
+      "scripts_validate_py",
+      "scripts_validate_rationale_13",
+      "scripts_validate_validate_skill"
+    ],
+    "4": [
+      "c_claude_code_refactorer_skill_github_quick_commands_sh__entry",
+      "github_quick_commands_sh"
+    ],
+    "5": [
+      "c_claude_code_refactorer_skill_upload_to_github_sh__entry",
+      "upload_to_github_sh"
+    ]
+  },
+  "cohesion": {
+    "0": 0.2857142857142857,
+    "1": 0.4,
+    "2": 0.6666666666666666,
+    "3": 0.6666666666666666,
+    "4": 1.0,
+    "5": 1.0
+  },
+  "gods": [
+    {
+      "id": "claude_settings_local_permissions",
+      "label": "permissions",
+      "degree": 2
+    },
+    {
+      "id": "scripts_validate_validate_skill",
+      "label": "validate_skill()",
+      "degree": 2
+    },
+    {
+      "id": "c_claude_code_refactorer_skill_github_quick_commands_sh__entry",
+      "label": "GITHUB_QUICK_COMMANDS.sh script",
+      "degree": 1
+    },
+    {
+      "id": "c_claude_code_refactorer_skill_upload_to_github_sh__entry",
+      "label": "upload-to-github.sh script",
+      "degree": 1
+    },
+    {
+      "id": "claude_settings_local_permissions_allow",
+      "label": "allow",
+      "degree": 1
+    },
+    {
+      "id": "scripts_validate_rationale_13",
+      "label": "Valida la estructura de la skill.",
+      "degree": 1
+    }
+  ],
+  "surprises": [
+    {
+      "source": "Code Refactorer Skill",
+      "target": "6-Phase Execution Model",
+      "source_files": [
+        "unknown",
+        "unknown"
+      ],
+      "confidence": "EXTRACTED",
+      "relation": "implements",
+      "note": "Bridges community 1 → community 0"
+    }
+  ],
+  "questions": [
+    {
+      "type": "isolated_nodes",
+      "question": "What connects `GITHUB_QUICK_COMMANDS.sh script`, `upload-to-github.sh script`, `allow` to the rest of the system?",
+      "why": "4 weakly-connected nodes found - possible documentation gaps or missing edges."
+    }
+  ]
+}

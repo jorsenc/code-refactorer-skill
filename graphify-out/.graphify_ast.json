@@ -1,0 +1,245 @@
+{
+  "nodes": [
+    {
+      "id": "github_quick_commands_sh",
+      "label": "GITHUB_QUICK_COMMANDS.sh",
+      "file_type": "code",
+      "source_file": "GITHUB_QUICK_COMMANDS.sh",
+      "source_location": "L1",
+      "metadata": {
+        "language": "bash",
+        "kind": "file"
+      }
+    },
+    {
+      "id": "c_claude_code_refactorer_skill_github_quick_commands_sh__entry",
+      "label": "GITHUB_QUICK_COMMANDS.sh script",
+      "file_type": "code",
+      "source_file": "GITHUB_QUICK_COMMANDS.sh",
+      "source_location": "L1",
+      "metadata": {
+        "language": "bash",
+        "kind": "bash_entrypoint"
+      }
+    },
+    {
+      "id": "test_cases_json",
+      "label": "test-cases.json",
+      "file_type": "code",
+      "source_file": "test-cases.json",
+      "source_location": "L1"
+    },
+    {
+      "id": "upload_to_github_sh",
+      "label": "upload-to-github.sh",
+      "file_type": "code",
+      "source_file": "upload-to-github.sh",
+      "source_location": "L1",
+      "metadata": {
+        "language": "bash",
+        "kind": "file"
+      }
+    },
+    {
+      "id": "c_claude_code_refactorer_skill_upload_to_github_sh__entry",
+      "label": "upload-to-github.sh script",
+      "file_type": "code",
+      "source_file": "upload-to-github.sh",
+      "source_location": "L1",
+      "metadata": {
+        "language": "bash",
+        "kind": "bash_entrypoint"
+      }
+    },
+    {
+      "id": "claude_settings_local_json",
+      "label": "settings.local.json",
+      "file_type": "code",
+      "source_file": ".claude/settings.local.json",
+      "source_location": "L1"
+    },
+    {
+      "id": "claude_settings_local_permissions",
+      "label": "permissions",
+      "file_type": "code",
+      "source_file": ".claude/settings.local.json",
+      "source_location": "L2"
+    },
+    {
+      "id": "claude_settings_local_permissions_allow",
+      "label": "allow",
+      "file_type": "code",
+      "source_file": ".claude/settings.local.json",
+      "source_location": "L3"
+    },
+    {
+      "id": "scripts_validate_py",
+      "label": "validate.py",
+      "file_type": "code",
+      "source_file": "scripts/validate.py",
+      "source_location": "L1"
+    },
+    {
+      "id": "scripts_validate_validate_skill",
+      "label": "validate_skill()",
+      "file_type": "code",
+      "source_file": "scripts/validate.py",
+      "source_location": "L12"
+    },
+    {
+      "id": "scripts_validate_rationale_13",
+      "label": "Valida la estructura de la skill.",
+      "file_type": "rationale",
+      "source_file": "scripts/validate.py",
+      "source_location": "L13"
+    }
+  ],
+  "edges": [
+    {
+      "source": "github_quick_commands_sh",
+      "target": "c_claude_code_refactorer_skill_github_quick_commands_sh__entry",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "GITHUB_QUICK_COMMANDS.sh",
+      "source_location": "L1",
+      "weight": 1.0
+    },
+    {
+      "source": "upload_to_github_sh",
+      "target": "c_claude_code_refactorer_skill_upload_to_github_sh__entry",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "upload-to-github.sh",
+      "source_location": "L1",
+      "weight": 1.0
+    },
+    {
+      "source": "claude_settings_local_json",
+      "target": "claude_settings_local_permissions",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".claude/settings.local.json",
+      "source_location": "L2",
+      "weight": 1.0
+    },
+    {
+      "source": "claude_settings_local_permissions",
+      "target": "claude_settings_local_permissions_allow",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".claude/settings.local.json",
+      "source_location": "L3",
+      "weight": 1.0
+    },
+    {
+      "source": "claude_settings_local_permissions_allow",
+      "target": "ref_bash_n_eliminar_la_carpeta_anidada_innecesaria_nrm_rf_code_refactorer_skill_n_n_verificar_la_estructura_final_necho_nueva_estructura_nls_1_grep_v_git_sort_n",
+      "relation": "extends",
+      "confidence": "EXTRACTED",
+      "source_file": ".claude/settings.local.json",
+      "source_location": "L3",
+      "weight": 1.0,
+      "context": "import"
+    },
+    {
+      "source": "claude_settings_local_permissions_allow",
+      "target": "ref_bash_git_add",
+      "relation": "extends",
+      "confidence": "EXTRACTED",
+      "source_file": ".claude/settings.local.json",
+      "source_location": "L3",
+      "weight": 1.0,
+      "context": "import"
+    },
+    {
+      "source": "claude_settings_local_permissions_allow",
+      "target": "ref_bash_git_commit_m_reorganize_directory_structure_flatten_nested_code_refactorer_skill_folder",
+      "relation": "extends",
+      "confidence": "EXTRACTED",
+      "source_file": ".claude/settings.local.json",
+      "source_location": "L3",
+      "weight": 1.0,
+      "context": "import"
+    },
+    {
+      "source": "claude_settings_local_permissions_allow",
+      "target": "ref_bash_git_push",
+      "relation": "extends",
+      "confidence": "EXTRACTED",
+      "source_file": ".claude/settings.local.json",
+      "source_location": "L3",
+      "weight": 1.0,
+      "context": "import"
+    },
+    {
+      "source": "claude_settings_local_permissions_allow",
+      "target": "ref_bash_git_reset",
+      "relation": "extends",
+      "confidence": "EXTRACTED",
+      "source_file": ".claude/settings.local.json",
+      "source_location": "L3",
+      "weight": 1.0,
+      "context": "import"
+    },
+    {
+      "source": "claude_settings_local_permissions_allow",
+      "target": "ref_powershell_python3_c_claude_code_refactorer_skill_scripts_validate_py",
+      "relation": "extends",
+      "confidence": "EXTRACTED",
+      "source_file": ".claude/settings.local.json",
+      "source_location": "L3",
+      "weight": 1.0,
+      "context": "import"
+    },
+    {
+      "source": "scripts_validate_py",
+      "target": "json",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/validate.py",
+      "source_location": "L8",
+      "weight": 1.0
+    },
+    {
+      "source": "scripts_validate_py",
+      "target": "os",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/validate.py",
+      "source_location": "L9",
+      "weight": 1.0
+    },
+    {
+      "source": "scripts_validate_py",
+      "target": "pathlib",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/validate.py",
+      "source_location": "L10",
+      "weight": 1.0
+    },
+    {
+      "source": "scripts_validate_py",
+      "target": "scripts_validate_validate_skill",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/validate.py",
+      "source_location": "L12",
+      "weight": 1.0
+    },
+    {
+      "source": "scripts_validate_rationale_13",
+      "target": "scripts_validate_validate_skill",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/validate.py",
+      "source_location": "L13",
+      "weight": 1.0
+    }
+  ],
+  "input_tokens": 0,
+  "output_tokens": 0
+}

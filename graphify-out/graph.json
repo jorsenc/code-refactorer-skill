@@ -1,0 +1,474 @@
+{
+  "directed": false,
+  "multigraph": false,
+  "graph": {
+    "hyperedges": [
+      {
+        "id": "phase_collection",
+        "label": "Six Execution Phases",
+        "confidence_score": 1,
+        "nodes": [
+          "six_phase_model"
+        ],
+        "relation": "participate_in",
+        "confidence": "EXTRACTED"
+      }
+    ]
+  },
+  "nodes": [
+    {
+      "label": "GITHUB_QUICK_COMMANDS.sh",
+      "file_type": "code",
+      "source_file": "GITHUB_QUICK_COMMANDS.sh",
+      "source_location": "L1",
+      "metadata": {
+        "language": "bash",
+        "kind": "file"
+      },
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "github_quick_commands_sh",
+      "community": 4,
+      "norm_label": "github_quick_commands.sh"
+    },
+    {
+      "label": "GITHUB_QUICK_COMMANDS.sh script",
+      "file_type": "code",
+      "source_file": "GITHUB_QUICK_COMMANDS.sh",
+      "source_location": "L1",
+      "metadata": {
+        "language": "bash",
+        "kind": "bash_entrypoint"
+      },
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "c_claude_code_refactorer_skill_github_quick_commands_sh__entry",
+      "community": 4,
+      "norm_label": "github_quick_commands.sh script"
+    },
+    {
+      "label": "test-cases.json",
+      "file_type": "code",
+      "source_file": "test-cases.json",
+      "source_location": "L1",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "test_cases_json",
+      "community": 1,
+      "norm_label": "test-cases.json"
+    },
+    {
+      "label": "upload-to-github.sh",
+      "file_type": "code",
+      "source_file": "upload-to-github.sh",
+      "source_location": "L1",
+      "metadata": {
+        "language": "bash",
+        "kind": "file"
+      },
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "upload_to_github_sh",
+      "community": 5,
+      "norm_label": "upload-to-github.sh"
+    },
+    {
+      "label": "upload-to-github.sh script",
+      "file_type": "code",
+      "source_file": "upload-to-github.sh",
+      "source_location": "L1",
+      "metadata": {
+        "language": "bash",
+        "kind": "bash_entrypoint"
+      },
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "c_claude_code_refactorer_skill_upload_to_github_sh__entry",
+      "community": 5,
+      "norm_label": "upload-to-github.sh script"
+    },
+    {
+      "label": "settings.local.json",
+      "file_type": "code",
+      "source_file": ".claude/settings.local.json",
+      "source_location": "L1",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "claude_settings_local_json",
+      "community": 2,
+      "norm_label": "settings.local.json"
+    },
+    {
+      "label": "permissions",
+      "file_type": "code",
+      "source_file": ".claude/settings.local.json",
+      "source_location": "L2",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "claude_settings_local_permissions",
+      "community": 2,
+      "norm_label": "permissions"
+    },
+    {
+      "label": "allow",
+      "file_type": "code",
+      "source_file": ".claude/settings.local.json",
+      "source_location": "L3",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "claude_settings_local_permissions_allow",
+      "community": 2,
+      "norm_label": "allow"
+    },
+    {
+      "label": "validate.py",
+      "file_type": "code",
+      "source_file": "scripts/validate.py",
+      "source_location": "L1",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "scripts_validate_py",
+      "community": 3,
+      "norm_label": "validate.py"
+    },
+    {
+      "label": "validate_skill()",
+      "file_type": "code",
+      "source_file": "scripts/validate.py",
+      "source_location": "L12",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "scripts_validate_validate_skill",
+      "community": 3,
+      "norm_label": "validate_skill()"
+    },
+    {
+      "label": "Valida la estructura de la skill.",
+      "file_type": "rationale",
+      "source_file": "scripts/validate.py",
+      "source_location": "L13",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "scripts_validate_rationale_13",
+      "community": 3,
+      "norm_label": "valida la estructura de la skill."
+    },
+    {
+      "label": "Code Refactorer Skill",
+      "file_type": "rationale",
+      "source_file": "unknown",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "skill_code_refactorer",
+      "community": 1,
+      "norm_label": "code refactorer skill"
+    },
+    {
+      "label": "6-Phase Execution Model",
+      "file_type": "rationale",
+      "source_file": "unknown",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "six_phase_model",
+      "community": 0,
+      "norm_label": "6-phase execution model"
+    },
+    {
+      "label": "Code Smells Reference",
+      "file_type": "document",
+      "source_file": "unknown",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "code_smells_ref",
+      "community": 0,
+      "norm_label": "code smells reference"
+    },
+    {
+      "label": "Design Patterns Reference",
+      "file_type": "document",
+      "source_file": "unknown",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "design_patterns_ref",
+      "community": 1,
+      "norm_label": "design patterns reference"
+    },
+    {
+      "label": "Metrics Reference",
+      "file_type": "document",
+      "source_file": "unknown",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "metrics_ref",
+      "community": 0,
+      "norm_label": "metrics reference"
+    },
+    {
+      "label": "Validation Script",
+      "file_type": "code",
+      "source_file": "unknown",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "validation_script",
+      "community": 1,
+      "norm_label": "validation script"
+    },
+    {
+      "label": "Legibility Analysis",
+      "file_type": "rationale",
+      "source_file": "unknown",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "analysis_legibility",
+      "community": 0,
+      "norm_label": "legibility analysis"
+    },
+    {
+      "label": "Maintainability Analysis",
+      "file_type": "rationale",
+      "source_file": "unknown",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "analysis_maintainability",
+      "community": 0,
+      "norm_label": "maintainability analysis"
+    },
+    {
+      "label": "Performance Analysis",
+      "file_type": "rationale",
+      "source_file": "unknown",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "analysis_performance",
+      "community": 0,
+      "norm_label": "performance analysis"
+    },
+    {
+      "label": "Security Analysis",
+      "file_type": "rationale",
+      "source_file": "unknown",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "analysis_security",
+      "community": 0,
+      "norm_label": "security analysis"
+    },
+    {
+      "label": "Documentation-Driven Architecture",
+      "file_type": "rationale",
+      "source_file": "unknown",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "doc_philosophy_driven",
+      "community": 1,
+      "norm_label": "documentation-driven architecture"
+    }
+  ],
+  "links": [
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "GITHUB_QUICK_COMMANDS.sh",
+      "source_location": "L1",
+      "weight": 1.0,
+      "source": "github_quick_commands_sh",
+      "target": "c_claude_code_refactorer_skill_github_quick_commands_sh__entry",
+      "confidence_score": 1.0
+    },
+    {
+      "confidence": "EXTRACTED",
+      "confidence_score": 1,
+      "relation": "references",
+      "source": "skill_code_refactorer",
+      "target": "test_cases_json"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "upload-to-github.sh",
+      "source_location": "L1",
+      "weight": 1.0,
+      "source": "upload_to_github_sh",
+      "target": "c_claude_code_refactorer_skill_upload_to_github_sh__entry",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".claude/settings.local.json",
+      "source_location": "L2",
+      "weight": 1.0,
+      "source": "claude_settings_local_json",
+      "target": "claude_settings_local_permissions",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".claude/settings.local.json",
+      "source_location": "L3",
+      "weight": 1.0,
+      "source": "claude_settings_local_permissions",
+      "target": "claude_settings_local_permissions_allow",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/validate.py",
+      "source_location": "L12",
+      "weight": 1.0,
+      "source": "scripts_validate_py",
+      "target": "scripts_validate_validate_skill",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/validate.py",
+      "source_location": "L13",
+      "weight": 1.0,
+      "source": "scripts_validate_rationale_13",
+      "target": "scripts_validate_validate_skill",
+      "confidence_score": 1.0
+    },
+    {
+      "confidence": "EXTRACTED",
+      "confidence_score": 1,
+      "relation": "references",
+      "source": "skill_code_refactorer",
+      "target": "design_patterns_ref"
+    },
+    {
+      "confidence": "EXTRACTED",
+      "confidence_score": 1,
+      "relation": "rationale_for",
+      "source": "skill_code_refactorer",
+      "target": "doc_philosophy_driven"
+    },
+    {
+      "confidence": "EXTRACTED",
+      "confidence_score": 1,
+      "relation": "implements",
+      "source": "skill_code_refactorer",
+      "target": "six_phase_model"
+    },
+    {
+      "confidence": "EXTRACTED",
+      "confidence_score": 1,
+      "relation": "references",
+      "source": "skill_code_refactorer",
+      "target": "validation_script"
+    },
+    {
+      "confidence": "EXTRACTED",
+      "confidence_score": 1,
+      "relation": "references",
+      "source": "six_phase_model",
+      "target": "analysis_legibility"
+    },
+    {
+      "confidence": "EXTRACTED",
+      "confidence_score": 1,
+      "relation": "references",
+      "source": "six_phase_model",
+      "target": "analysis_maintainability"
+    },
+    {
+      "confidence": "EXTRACTED",
+      "confidence_score": 1,
+      "relation": "references",
+      "source": "six_phase_model",
+      "target": "analysis_performance"
+    },
+    {
+      "confidence": "EXTRACTED",
+      "confidence_score": 1,
+      "relation": "references",
+      "source": "six_phase_model",
+      "target": "analysis_security"
+    },
+    {
+      "confidence": "EXTRACTED",
+      "confidence_score": 1,
+      "relation": "references",
+      "source": "analysis_legibility",
+      "target": "code_smells_ref"
+    },
+    {
+      "confidence": "EXTRACTED",
+      "confidence_score": 1,
+      "relation": "references",
+      "source": "analysis_maintainability",
+      "target": "metrics_ref"
+    }
+  ],
+  "hyperedges": [
+    {
+      "id": "phase_collection",
+      "label": "Six Execution Phases",
+      "confidence_score": 1,
+      "nodes": [
+        "six_phase_model"
+      ],
+      "relation": "participate_in",
+      "confidence": "EXTRACTED"
+    }
+  ],
+  "built_at_commit": "021298ce4521ecc94ad3d4e43c3ad522d660d486"
+}
