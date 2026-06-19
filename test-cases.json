@@ -1,0 +1,105 @@
+[
+  {
+    "id": "test_1_python_simple",
+    "title": "Python - Función simple con code smells",
+    "language": "python",
+    "input": "def process_data(data, threshold):\n    result = []\n    for i in range(len(data)):\n        if data[i] > threshold:\n            result.append(data[i] * 2)\n    return result",
+    "expected_issues": [
+      "Nombres genéricos (data, result, i)",
+      "Uso de range(len()) en lugar de iteración directa",
+      "Falta de type hints",
+      "Falta de documentación"
+    ],
+    "expected_improvements": [
+      "Usar nombres descriptivos",
+      "Usar list comprehension",
+      "Agregar type hints",
+      "Agregar docstring"
+    ]
+  },
+  {
+    "id": "test_2_javascript_callbacks",
+    "title": "JavaScript - Callback Hell",
+    "language": "javascript",
+    "input": "function processUser(userId, callback) {\n  fetchUser(userId, function(err, user) {\n    if (err) {\n      callback(err);\n    } else {\n      fetchProfile(user.id, function(err, profile) {\n        if (err) {\n          callback(err);\n        } else {\n          fetchPosts(profile.id, function(err, posts) {\n            if (err) {\n              callback(err);\n            } else {\n              callback(null, { user, profile, posts });\n            }\n          });\n        }\n      });\n    }\n  });\n}",
+    "expected_issues": [
+      "Callback Hell / Pyramid of Doom",
+      "Duplicación de error handling",
+      "Alta complejidad anidada"
+    ],
+    "expected_improvements": [
+      "Convertir a async/await",
+      "Centralizar error handling",
+      "Reducir anidación"
+    ]
+  },
+  {
+    "id": "test_3_java_nullpointers",
+    "title": "Java - Null pointer dereference",
+    "language": "java",
+    "input": "public String getUserCity(User user) {\n  String city = user.getProfile().getAddress().getCity();\n  return city;\n}",
+    "expected_issues": [
+      "NullPointerException potencial",
+      "No usa Optional",
+      "No valida estados intermedios"
+    ],
+    "expected_improvements": [
+      "Usar Optional",
+      "Agregar null checks",
+      "Manejo de errores"
+    ]
+  },
+  {
+    "id": "test_4_python_god_object",
+    "title": "Python - God Object con múltiples responsabilidades",
+    "language": "python",
+    "input": "class UserManager:\n    def __init__(self):\n        self.db = Database()\n        self.email_service = EmailService()\n    \n    def create_user(self, name, email):\n        user = self.db.insert('users', {'name': name, 'email': email})\n        return user\n    \n    def validate_email(self, email):\n        return '@' in email\n    \n    def send_welcome_email(self, user):\n        subject = f\"Welcome {user['name']}\"\n        self.email_service.send(user['email'], subject, 'Welcome!')\n    \n    def delete_user(self, user_id):\n        return self.db.delete('users', user_id)\n    \n    def get_user_by_email(self, email):\n        return self.db.query('users', {'email': email})[0]\n    \n    def update_user_profile(self, user_id, profile_data):\n        return self.db.update('users', user_id, profile_data)\n    \n    def send_notification(self, user_id, message):\n        user = self.db.query('users', user_id)[0]\n        self.email_service.send(user['email'], 'Notification', message)",
+    "expected_issues": [
+      "Múltiples responsabilidades (SRP violation)",
+      "Acoplamiento con Database y EmailService",
+      "Falta de inyección de dependencias",
+      "Métodos mixtos de validación, persistencia, comunicación"
+    ],
+    "expected_improvements": [
+      "Separar en UserRepository, UserValidator, UserNotifier",
+      "Inyectar dependencias",
+      "Aplicar principio de responsabilidad única",
+      "Mejorar testabilidad"
+    ]
+  },
+  {
+    "id": "test_5_code_duplication",
+    "title": "Python - Código duplicado",
+    "language": "python",
+    "input": "def validate_email(email):\n    if not email:\n        return False\n    if '@' not in email:\n        return False\n    if '.' not in email:\n        return False\n    return True\n\ndef validate_phone(phone):\n    if not phone:\n        return False\n    if len(phone) < 10:\n        return False\n    if not phone.isdigit():\n        return False\n    return True\n\ndef validate_username(username):\n    if not username:\n        return False\n    if len(username) < 3:\n        return False\n    if not username.isalnum():\n        return False\n    return True",
+    "expected_issues": [
+      "Validación repetida (no field)",
+      "Patrón similar en las tres funciones",
+      "Oportunidad de usar decoradores o factory"
+    ],
+    "expected_improvements": [
+      "Crear validador genérico",
+      "Usar composición de validadores",
+      "Reducir duplicación 60%"
+    ]
+  },
+  {
+    "id": "test_6_typescript_no_types",
+    "title": "TypeScript - Sin type hints",
+    "language": "typescript",
+    "input": "function calculatePrice(basePrice, quantity, taxRate, discount) {\n  const subtotal = basePrice * quantity;\n  const tax = subtotal * taxRate;\n  const finalDiscount = subtotal * discount;\n  return subtotal + tax - finalDiscount;\n}\n\nfunction applyDiscount(items, code) {\n  for (const item of items) {\n    if (code === 'SUMMER20') {\n      item.price = item.price * 0.8;\n    } else if (code === 'FALL15') {\n      item.price = item.price * 0.85;\n    }\n  }\n  return items;\n}",
+    "expected_issues": [
+      "Falta de type annotations",
+      "Sin tipos de retorno",
+      "Hardcoded strings (magic numbers)",
+      "Mutación de objetos",
+      "Strategy Pattern oculto en condicionales"
+    ],
+    "expected_improvements": [
+      "Agregar tipos completos",
+      "Usar enums para códigos",
+      "Extraer Strategy para descuentos",
+      "Usar immutability"
+    ]
+  }
+]
