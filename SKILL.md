@@ -200,39 +200,98 @@ Ejecuta el análisis en cada dimensión:
 ## Consideraciones especiales por lenguaje
 
 ### Python
-- PEP 8 compliance
-- Type hints modernos
-- Context managers vs try/finally
-- List comprehensions vs loops
-- Decoradores y meta-programming
+**Análisis específico**:
+- **Estilo**: PEP 8 compliance, naming conventions (snake_case)
+- **Tipos**: Type hints modernos (PEP 484, 585), Union types, TypeVar
+- **Async**: async/await sobre asyncio, generators, context managers
+- **Sintaxis**: List/dict/set comprehensions vs loops, decoradores, f-strings
+- **Patrones**: Dataclasses vs named tuples vs namedtuples, duck typing
+- **Referencias**: code-smells.md secciones Python y Database
+- **Frameworks**: Django N+1 queries (use prefetch_related), FastAPI async patterns
 
-### JavaScript/TypeScript
-- ES6+ features
-- Async/await vs Promises
-- Type safety (TypeScript)
-- Module patterns
-- React patterns (si aplica)
+### TypeScript
+**Análisis específico**:
+- **Tipos**: Type safety, generics, union/intersection types, type guards
+- **Decoradores**: Angular-style decorators, class-based type declaration
+- **Async**: async/await sobre Promises, RxJS observables (si aplica)
+- **Interfaces**: Structurally typed interfaces, strict property declaration
+- **Patrones**: React Hooks vs class components, dependency injection
+- **Referencias**: code-smells.md sección TypeScript, patterns-advanced.md Testing
+- **Frameworks**: Angular RxJS patterns, React Hooks rules, NestJS decorators
+
+### JavaScript
+**Análisis específico**:
+- **ES6+**: Arrow functions, destructuring, spread operator, classes
+- **Async**: Promises vs async/await, callback hell avoidance
+- **Patrones**: Module patterns, IIFE, closures for encapsulation
+- **Arrays/Strings**: map/filter/reduce over loops, string interpolation
+- **Referencias**: code-smells.md sección JavaScript, patterns-advanced.md Async
+- **Frameworks**: React JSX patterns, Node.js middleware chains
 
 ### Java
-- Principios SOLID
-- Generics
-- Streams API
-- Exception handling
-- Design patterns GoF
+**Análisis específico**:
+- **SOLID**: Separación de responsabilidades, dependency injection
+- **Generics**: Type erasure awareness, wildcards vs bounded types
+- **Streams API**: map/filter/reduce patterns, lazy evaluation
+- **Exceptions**: Checked vs unchecked, custom exception hierarchies
+- **Patrones**: Factory, Strategy, Observer (GoF), Records (Java 14+)
+- **Referencias**: code-smells.md sección Java, patterns-advanced.md Architectural
+- **Frameworks**: Spring dependency injection, Hibernate ORM patterns
 
 ### C#/.NET
-- LINQ
-- Async/await
-- Null coalescing
-- Properties vs fields
-- SOLID principles
+**Análisis específico**:
+- **LINQ**: Method chaining, deferred execution, expression trees
+- **Async**: async/await, ConfigureAwait(false), Task vs ValueTask
+- **Null safety**: Nullable reference types (C# 8+), null-coalescing operator (??)
+- **Propiedades**: Properties vs auto-properties vs fields, init-only properties
+- **Patrones**: SOLID, async factory patterns, dependency injection containers
+- **Referencias**: code-smells.md sección C#/.NET, patterns-advanced.md Resilience
+- **Frameworks**: ASP.NET Core middleware, Entity Framework Core async queries
 
 ### Go
-- Interfaces
-- Error handling
-- Goroutines
-- Channels
-- Composition over inheritance
+**Análisis específico**:
+- **Interfaces**: Implicit interfaces, composition over inheritance
+- **Errores**: Error handling (err != nil), custom error types, error wrapping
+- **Concurrencia**: Goroutines, channels, select statements, sync patterns
+- **Paquetes**: Package organization, unexported vs exported (naming)
+- **Patrones**: Interface segregation, dependency injection (constructor)
+- **Referencias**: code-smells.md sección Go, patterns-advanced.md Concurrency
+- **Frameworks**: Web frameworks (Gin, Echo) middleware patterns
+
+### Rust
+**Análisis específico**:
+- **Ownership**: Borrow checker, move semantics, lifetimes
+- **Errores**: Result<T, E> vs Option<T>, error propagation (?), custom errors
+- **Seguridad**: Memory safety, no null pointers, unwrap/expect wisely
+- **Concurrencia**: Safe concurrent patterns, Arc, Mutex, channels
+- **Patrones**: Builder pattern, type state pattern, trait-based design
+- **Referencias**: code-smells.md sección Rust, patterns-advanced.md Actor Model
+
+### Ruby
+**Análisis específico**:
+- **Estilo**: Snake_case, convention over configuration, blocks/yield
+- **Metaprogramming**: Monkey patching (use modules), eval avoidance
+- **Collections**: map/select/reduce over imperative loops, Symbol vs String
+- **Patrones**: Mixins (modules), duck typing, DSL patterns
+- **Rails**: ActiveRecord patterns, migrations, concern patterns
+- **Referencias**: code-smells.md sección Ruby, patterns-advanced.md Testing
+
+### PHP
+**Análisis específico**:
+- **OOP**: Type declarations, access modifiers, interfaces vs traits
+- **Async**: Generators (yield), async via Amp/ReactPHP, error handling
+- **Strings**: Type juggling risks, early returns to reduce nesting
+- **Frameworks**: Laravel service containers, middleware pipeline, eloquent ORM
+- **Referencias**: code-smells.md secciones universales, patrones framework-specific
+
+### Kotlin
+**Análisis específico**:
+- **Null safety**: Non-null by default, smart casts, ?: Elvis operator
+- **Funcional**: Lambda expressions, extension functions, scoping functions
+- **Coroutines**: Async patterns via Kotlin coroutines, structured concurrency
+- **Java interop**: Java collection compatibility, Kotlin-Java bridge patterns
+- **Android**: Fragment lifecycle, LiveData patterns, Jetpack Compose (si aplica)
+- **Referencias**: patterns-advanced.md Async, concurrency best practices
 
 ## Salida esperada
 

@@ -248,6 +248,84 @@ radon metrics file.py  # Métricas generales
 - **dupl**: Duplicación
 - **go tool cover**: Coverage
 
+## Cognitive Complexity
+
+**Qué mide**: Complejidad **percibida** por un humano (diferente a CC ciclomática).
+
+Mientras que Cyclomatic Complexity cuenta decisiones (if/switch/loop), Cognitive Complexity considera:
+- Anidación profunda (cuesta más entender)
+- Operadores lógicos complejos
+- Rupturas de flujo (break, continue, return)
+
+**Escala** (por función):
+- **1-5**: Excelente (muy fácil de entender)
+- **5-10**: Bueno (comprensible)
+- **10-15**: Complejo (requiere análisis)
+- **15-25**: Muy complejo (refactorizar)
+- **>25**: Crítico (refactorizar inmediatamente)
+
+**Ejemplo**:
+```python
+# CC=4, pero Cognitive Complexity=6
+# (porque la anidación cuesta más que decisiones simples)
+def process(data):
+    for item in data:
+        if item.valid:
+            if item.priority > 5:
+                if item.owner:
+                    return process_high_priority(item)
+```
+
+**Herramientas**: SonarQube, CodeClimate, Pylint (con plugins)
+
+---
+
+## Technical Debt Ratio (SQALE)
+
+**Qué mide**: Cuántos **días-persona** costaría eliminar todos los issues.
+
+Calculado por: `Tiempo para resolver = Tiempo-persona × Número de issues`
+
+**Escala** (en porcentaje del tiempo de desarrollo):
+- **<5%**: Excelente (deuda mínima)
+- **5-10%**: Bueno (manejable)
+- **10-20%**: Alerta (acumula rápido)
+- **20-50%**: Crítico (requiere atención)
+- **>50%**: Emergencia (proyecto en riesgo)
+
+**Ejemplo**:
+- 100 code smells × 20 min cada uno = 2000 min ≈ 33 horas
+- Si el proyecto tiene 500 horas de desarrollo: 33/500 = **6.6% deuda técnica**
+
+**Herramientas**: SonarQube (métrica SQALE), CodeClimate, Codacy
+
+---
+
+## Herramientas por Lenguaje
+
+| Métrica | Python | JavaScript | Java | C# | Go |
+|---------|--------|------------|------|----|----|
+| **Cyclomatic Complexity** | radon, pylint | ESLint | SonarQube, Eclipse | SonarQube | gocyclo |
+| **Cognitive Complexity** | pylint (plugin) | ESLint (plugin) | SonarQube | SonarQube | golangci-lint |
+| **Maintainability Index** | Lizard | ESLint | SonarQube | Roslyn | golangci-lint |
+| **Duplication** | pylint, Copy/Paste | ESLint | SonarQube | SonarQube | golangci-lint |
+| **Coverage** | coverage.py | Istanbul, Nyc | JaCoCo | OpenCover | Gocover |
+| **Technical Debt** | SonarQube | SonarQube | SonarQube | SonarQube | SonarQube |
+
+---
+
+## Integración de métricas en CI/CD
+
+```yaml
+# GitHub Actions example
+- name: Check Metrics
+  run: |
+    python3 -m pylint src/
+    python3 -m radon cc src/ --min B --show-complexity
+    # Fallar si CC > 10 en alguna función
+    if radon_result > 10; then exit 1; fi
+```
+
 ---
 
 ## Cómo usar métricas en refactorización

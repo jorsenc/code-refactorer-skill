@@ -101,5 +101,111 @@
       "Extraer Strategy para descuentos",
       "Usar immutability"
     ]
+  },
+  {
+    "id": "test_7_rust_unwrap_abuse",
+    "title": "Rust - unwrap() y error handling",
+    "language": "rust",
+    "input": "fn read_config() -> String {\n    std::fs::read_to_string(\"config.json\").unwrap()\n}\n\nfn parse_number(input: &str) -> i32 {\n    input.parse().unwrap()\n}\n\nfn get_user_age(users: &[User], id: usize) -> i32 {\n    users[id].age\n}\n\nfn fetch_data(url: &str) -> Vec<u8> {\n    std::process::Command::new(\"curl\")\n        .arg(url)\n        .output()\n        .unwrap()\n        .stdout\n}",
+    "expected_issues": [
+      "unwrap() sin manejo de errores",
+      "Potenciales panics en runtime",
+      "No usa Result/Option",
+      "Array access sin bounds checking"
+    ],
+    "expected_improvements": [
+      "Usar Result<T, E> para errores recuperables",
+      "Match/expect() con mensajes claros",
+      "Usar .get() en lugar de indexación directa",
+      "Propagate errors con ?"
+    ]
+  },
+  {
+    "id": "test_8_ruby_monkey_patching",
+    "title": "Ruby - Monkey patching y bad practices",
+    "language": "ruby",
+    "input": "class String\n  def shout\n    self.upcase + \"!!!\"\n  end\nend\n\nclass Array\n  def remove_nils\n    self.select { |x| !x.nil? }\n  end\nend\n\nusers.each do |user|\n  puts \"Processing #{user.name}\"\n  db.transaction do\n    user.update_last_login\n    user.increment_login_count\n    if user.should_send_email?\n      mail_service.send(user.email, \"Welcome back!\")\n    end\n  end\nend",
+    "expected_issues": [
+      "Monkey patching de String y Array",
+      "Bloque each demasiado largo",
+      "Código imperativo vs funcional"
+    ],
+    "expected_improvements": [
+      "Crear módulos para extender, no monkey patch",
+      "Extraer lógica del each a método separado",
+      "Usar scope functions de Ruby (tap, yield_self)"
+    ]
+  },
+  {
+    "id": "test_9_database_n_plus_one",
+    "title": "Database - N+1 query problem",
+    "language": "python",
+    "input": "# Django ORM\nusers = User.objects.all()\nfor user in users:\n    print(f\"{user.name}: {user.profile.bio}\")\n    for post in user.posts.all():\n        print(f\"  - {post.title}\")\n\n# SQL\nSELECT * FROM users;\n-- Para cada usuario:\nSELECT * FROM profiles WHERE user_id = ?;\nSELECT * FROM posts WHERE user_id = ?;",
+    "expected_issues": [
+      "N+1 queries (1 user query + N profile + N post queries)",
+      "SELECT * innecesario",
+      "Falta de índices implícita",
+      "Query ineficiente en loop"
+    ],
+    "expected_improvements": [
+      "Usar prefetch_related() en Django",
+      "Usar select_related() para joins",
+      "Optimizar a máximo 2-3 queries totales",
+      "Agregar índices en user_id"
+    ]
+  },
+  {
+    "id": "test_10_async_promise_chains",
+    "title": "JavaScript - Promise chains vs async/await",
+    "language": "javascript",
+    "input": "function processData(url) {\n  return fetch(url)\n    .then(response => {\n      if (!response.ok) throw new Error(response.status);\n      return response.json();\n    })\n    .then(data => {\n      return transformData(data)\n        .then(transformed => {\n          return saveToDb(transformed)\n            .then(result => {\n              return sendNotification(result.id)\n                .then(() => result);\n            });\n        });\n    })\n    .catch(error => {\n      console.error('Error:', error);\n      return null;\n    });\n}",
+    "expected_issues": [
+      "Promise chains profundas",
+      "Anidación compleja",
+      "Error handling disperso",
+      "Difícil de leer y mantener"
+    ],
+    "expected_improvements": [
+      "Convertir a async/await",
+      "Centralizar try/catch",
+      "Reducir anidación a 1 nivel",
+      "Mayor legibilidad"
+    ]
+  },
+  {
+    "id": "test_11_security_basic_injection",
+    "title": "Security - Básicas (SQL injection detection)",
+    "language": "python",
+    "input": "# ❌ Vulnerable\nquery = f\"SELECT * FROM users WHERE email = '{email}'\"\ndb.execute(query)\n\nquery = \"SELECT * FROM users WHERE name = '\" + user_input + \"'\"\ndb.execute(query)\n\n# SQL\nSELECT * FROM users WHERE status = '\" OR \"1\"=\"1';\n-- ' OR '1'='1 en email parameter",
+    "expected_issues": [
+      "String concatenation en queries",
+      "SQL injection vulnerability",
+      "Input no validado directamente en query",
+      "Sin prepared statements"
+    ],
+    "expected_improvements": [
+      "Usar parameterized queries",
+      "Prepared statements con placeholders",
+      "Validar y sanitizar input",
+      "Usar ORM en lugar de raw SQL"
+    ]
+  },
+  {
+    "id": "test_12_large_file_refactor",
+    "title": "Archivo grande - Refactorización incremental (>500 líneas)",
+    "language": "python",
+    "input": "# Simular archivo grande con múltiples problemas\nclass ApplicationService:\n    def __init__(self, db, cache, logger, config, email_service, auth_service):\n        self.db = db\n        self.cache = cache\n        self.logger = logger\n        self.config = config\n        self.email = email_service\n        self.auth = auth_service\n    \n    def process_user_registration(self, data):\n        # Validación inline\n        if not data.get('email'):\n            return {'error': 'Email required'}\n        if '@' not in data['email']:\n            return {'error': 'Invalid email'}\n        # ... más validación\n        \n        # Lógica de negocio mixta\n        user = self.db.create_user(data)\n        self.cache.set(f\"user:{user.id}\", user)\n        self.email.send(user.email, \"Welcome\")\n        self.logger.info(f\"User {user.id} created\")\n        \n        # Más métodos similares...\n        # 400+ líneas en una clase",
+    "expected_issues": [
+      "God Object con demasiadas responsabilidades",
+      "Inyección de demasiadas dependencias",
+      "Validación, lógica y side effects mezclados",
+      "Archivo >500 líneas, bajo testabilidad"
+    ],
+    "expected_improvements": [
+      "Separar en: UserValidator, UserRepository, UserNotifier, RegistrationService",
+      "Inyectar solo lo necesario",
+      "Extraer validación a objeto separado",
+      "Plan incremental de refactorización"
+    ]
   }
 ]

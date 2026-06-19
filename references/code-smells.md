@@ -343,6 +343,324 @@ wg.Wait()
 
 ---
 
+## TypeScript-específicos
+
+### 1. Generics complejos sin restricción
+```typescript
+// ❌ Malo
+function process<T>(data: T): T {
+  return data; // ¿Qué hacer con T?
+}
+
+// ✅ Bueno
+function process<T extends { id: string }>(data: T): T {
+  return data; // Sabemos que T tiene 'id'
+}
+```
+
+### 2. Tipos any en lugar de tipado específico
+```typescript
+// ❌ Malo
+function handleData(data: any) {
+  return data.name.toUpperCase();
+}
+
+// ✅ Bueno
+interface User {
+  name: string;
+}
+
+function handleData(data: User) {
+  return data.name.toUpperCase();
+}
+```
+
+### 3. Type guards faltantes
+```typescript
+// ❌ Malo
+function process(value: string | number) {
+  console.log(value.toUpperCase()); // Error si es number
+}
+
+// ✅ Bueno
+function process(value: string | number) {
+  if (typeof value === 'string') {
+    console.log(value.toUpperCase());
+  } else {
+    console.log(value.toString());
+  }
+}
+```
+
+### 4. Decoradores mal tipados
+```typescript
+// ❌ Malo
+function Memoize(target: any, propertyKey: any, descriptor: any) {
+  // Sin tipos específicos
+}
+
+// ✅ Bueno
+function Memoize(target: Object, propertyKey: string | symbol, descriptor: PropertyDescriptor) {
+  // Tipos específicos
+}
+```
+
+---
+
+## Rust-específicos
+
+### 1. unwrap() innecesario
+```rust
+// ❌ Malo
+let number = "42".parse::<i32>().unwrap(); // Panic si falla
+
+// ✅ Bueno
+match "42".parse::<i32>() {
+    Ok(number) => println!("{}", number),
+    Err(e) => eprintln!("Parse error: {}", e),
+}
+```
+
+### 2. No usar Result/Option
+```rust
+// ❌ Malo
+fn read_file() -> String {
+  // ¿Qué si el archivo no existe?
+  std::fs::read_to_string("file.txt").unwrap()
+}
+
+// ✅ Bueno
+fn read_file() -> Result<String, std::io::Error> {
+  std::fs::read_to_string("file.txt")
+}
+```
+
+### 3. Borrow checker misuse
+```rust
+// ❌ Malo
+fn process(data: &mut Vec<i32>) {
+  let copy = data.clone();
+  // Uso innecesario de clone
+}
+
+// ✅ Bueno
+fn process(data: &Vec<i32>) {
+  for item in data {
+    // Usar referencias
+  }
+}
+```
+
+### 4. Panics innecesarios
+```rust
+// ❌ Malo
+let items: Vec<i32> = vec![1, 2, 3];
+let item = items[10]; // Panic!
+
+// ✅ Bueno
+let items: Vec<i32> = vec![1, 2, 3];
+match items.get(10) {
+    Some(item) => println!("{}", item),
+    None => println!("Index out of bounds"),
+}
+```
+
+---
+
+## Ruby-específicos
+
+### 1. Monkey patching
+```ruby
+# ❌ Malo
+class String
+  def my_method
+    self.upcase
+  end
+end
+
+# ✅ Bueno
+module StringExtensions
+  def my_method
+    self.upcase
+  end
+end
+String.include(StringExtensions)
+```
+
+### 2. Bloques demasiado largos
+```ruby
+# ❌ Malo
+users.each do |user|
+  # 20+ líneas de lógica
+end
+
+# ✅ Bueno
+users.each { |user| process_user(user) }
+
+def process_user(user)
+  # Lógica clara en método separado
+end
+```
+
+### 3. attr_accessor innecesario
+```ruby
+# ❌ Malo
+class User
+  attr_accessor :name, :email, :age, :phone, :address
+  # 5 atributos públicos = demasiada exposición
+end
+
+# ✅ Bueno
+class User
+  attr_reader :name, :email
+  attr_accessor :age # Solo lo que necesita cambiar
+end
+```
+
+### 4. No usar blocks y yield
+```ruby
+# ❌ Malo
+def process_items(items, operation)
+  items.each do |item|
+    if operation == :double
+      puts item * 2
+    elsif operation == :square
+      puts item ** 2
+    end
+  end
+end
+
+# ✅ Bueno
+def process_items(items)
+  items.each { |item| yield(item) }
+end
+
+process_items([1, 2, 3]) { |i| puts i * 2 }
+```
+
+---
+
+## Magic Strings & Constants
+
+Complemento a "Números mágicos" - valores de string sin contexto.
+
+```python
+# ❌ Malo (Python)
+if user.role == "admin":
+    grant_permissions()
+
+# ✅ Bueno
+class UserRole:
+    ADMIN = "admin"
+    USER = "user"
+
+if user.role == UserRole.ADMIN:
+    grant_permissions()
+```
+
+```javascript
+// ❌ Malo (JavaScript)
+if (status === "active" || status === "pending") {
+    processOrder();
+}
+
+// ✅ Bueno
+const ORDER_STATUSES = {
+    ACTIVE: "active",
+    PENDING: "pending",
+};
+
+if ([ORDER_STATUSES.ACTIVE, ORDER_STATUSES.PENDING].includes(status)) {
+    processOrder();
+}
+```
+
+---
+
+## Database Anti-patterns
+
+### N+1 Queries
+```python
+# ❌ Malo (Django)
+users = User.objects.all()
+for user in users:
+    print(user.profile.bio)  # 1 query + N queries (una por usuario)
+
+# ✅ Bueno
+users = User.objects.prefetch_related('profile').all()
+for user in users:
+    print(user.profile.bio)  # 1 + 1 query total
+```
+
+### SELECT * innecesario
+```sql
+-- ❌ Malo
+SELECT * FROM users WHERE status = 'active';
+
+-- ✅ Bueno
+SELECT id, name, email FROM users WHERE status = 'active';
+```
+
+### Falta de índices
+```sql
+-- ❌ Malo
+CREATE TABLE orders (user_id INT, amount DECIMAL);
+-- Búsquedas por user_id son lentas
+
+-- ✅ Bueno
+CREATE TABLE orders (
+    user_id INT,
+    amount DECIMAL,
+    INDEX idx_user_id (user_id)
+);
+```
+
+---
+
+## Performance Anti-patterns
+
+### Operaciones costosas en loops
+```python
+# ❌ Malo
+for item in items:
+    result = expensive_operation()  # Se ejecuta N veces
+    process(item, result)
+
+# ✅ Bueno
+result = expensive_operation()  # Una sola vez
+for item in items:
+    process(item, result)
+```
+
+### String concatenación en loops
+```javascript
+// ❌ Malo
+let result = "";
+for (let i = 0; i < 1000; i++) {
+    result += getValue(i);  // Crea nuevo string cada iteración
+}
+
+// ✅ Bueno
+const parts = [];
+for (let i = 0; i < 1000; i++) {
+    parts.push(getValue(i));
+}
+const result = parts.join("");
+```
+
+### Queries sin LIMIT
+```sql
+-- ❌ Malo
+SELECT * FROM logs;  -- Millones de registros
+
+-- ✅ Bueno
+SELECT * FROM logs LIMIT 100;
+-- O usar paginación
+SELECT * FROM logs LIMIT 100 OFFSET 0;
+```
+
+---
+
 ## Cómo usar esta referencia
 
 Durante el análisis de código:
