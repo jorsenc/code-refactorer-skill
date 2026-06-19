@@ -1,5 +1,7 @@
 ---
 name: code-refactorer
+version: 2.0
+date: 2026-06-19
 description: Refactoriza y mejora código fuente en cualquier lenguaje de programación. Úsalo siempre que el usuario quiera mejorar, optimizar o limpiar código existente, ya sea pegando fragmentos directamente, subiendo archivos, o indicando URLs. Detecta automáticamente problemas como duplicación, complejidad excesiva, code smells, falta de patrones de diseño, y oportunidades de optimización. Genera informes completos con análisis detallado, comparativas antes/después, métricas de mantenibilidad y recomendaciones de patrones. Actívalo cuando el usuario mencione "refactorizar", "limpiar código", "optimizar", "mejorar este código", "auditar código", "code review", "deuda técnica", "code smells", o simplemente pegue código que parezca que podría mejorarse.
 ---
 
