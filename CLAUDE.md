@@ -2,6 +2,27 @@
 
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
+## Quick Start
+
+**Essential commands** for this project:
+
+```bash
+# Validate the skill structure
+python3 scripts/validate.py
+
+# Check JSON validity in test cases
+python -m json.tool test-cases.json > /dev/null
+
+# Test a single code smell detection
+python -c "import json; print(json.dumps(json.load(open('test-cases.json')), indent=2))" | head -50
+```
+
+**Model requirement**: Claude Sonnet 4.0 or higher (this skill requires substantial reasoning capacity)
+
+**Key workflow**: Read SKILL.md → check references → edit CLAUDE.md/test-cases.json → validate → test
+
+---
+
 ## Project Overview
 
 **Code Refactorer Skill** is a specialized Claude AI skill for refactoring and improving source code across any programming language. It detects code smells, duplications, complexity issues, and design pattern opportunities, then provides refactored code with detailed explanations.
@@ -53,20 +74,43 @@ This checks:
 
 ### Key Files to Understand
 
-When working with the skill:
+When working with the skill, each file serves a specific purpose:
 
-1. **For triggers & flow** → Read [SKILL.md](SKILL.md)
-2. **For code smell detection logic** → Read [references/code-smells.md](references/code-smells.md)
-3. **For refactoring proposals** → Read [references/design-patterns.md](references/design-patterns.md)
-4. **For metrics** → Read [references/metrics.md](references/metrics.md)
-5. **For testing** → Check [test-cases.json](test-cases.json)
+1. **[SKILL.md](SKILL.md)** — Behavior definition; controls how the skill executes. Only edit frontmatter or flow sections; changes here affect Claude's reasoning.
+2. **[references/code-smells.md](references/code-smells.md)** — Knowledge base; 50+ problems organized by language. Safe to expand with new smells; existing patterns should not be modified without reason.
+3. **[references/design-patterns.md](references/design-patterns.md)** — Pattern reference; GoF + SOLID. Add patterns as needed; reorganizing existing entries requires care (Claude references them by position).
+4. **[references/metrics.md](references/metrics.md)** — Interpretation guide; explains how to read code quality numbers. Update thresholds and tools when standards change.
+5. **[test-cases.json](test-cases.json)** — Validation suite; 6 test cases covering key scenarios. Add new cases to expand coverage; existing cases should stay representative.
 
-### Testing the Skill
+### Testing and Validating Changes
 
-Use the test cases in `test-cases.json` to verify the skill works correctly. Each case includes:
-- Input code with intentional issues
-- Expected problems to identify
-- Expected improvements to suggest
+**Local validation:**
+```bash
+# Run the validation script (checks structure, JSON, content size)
+python3 scripts/validate.py
+
+# Should output: ✅ Validation successful
+```
+
+**Manual testing after changes:**
+1. Edit the file you changed
+2. Run `python3 scripts/validate.py` 
+3. Copy updated `test-cases.json` or references to test in Claude.ai
+4. Run the skill against the test cases
+5. Verify it detects expected issues and proposes correct improvements
+
+**What each test case validates:**
+- Python simple → Basic code smell detection, list comprehension conversion
+- JavaScript callbacks → Callback hell detection, async/await suggestion  
+- Java nullpointers → NPE risk detection, Optional suggestion
+- Python god object → SRP violation detection, class decomposition
+- Python duplication → Code duplication detection, extraction
+- TypeScript types → Type safety issues, annotation suggestions
+
+If a test case starts failing after your changes, investigate whether:
+- The reference file was accidentally corrupted
+- A code smell pattern needs clarification
+- The test case itself is invalid
 
 ### Documentation to Maintain
 
@@ -74,6 +118,22 @@ Use the test cases in `test-cases.json` to verify the skill works correctly. Eac
 - **QUICK_START.md** — Quick guide for users getting started
 - **ARCHITECTURE.md** — Detailed technical architecture and analysis strategy
 - **SKILL.md** — The actual skill definition (this drives behavior)
+
+## Reference Files Philosophy
+
+The skill's core strength is that it's **documentation-driven, not code-driven**. Rather than implementing detection logic in code, three reference Markdown files guide Claude's analysis:
+
+1. **code-smells.md** — catalog of problems, organized by language
+2. **design-patterns.md** — applicable patterns and when to use them
+3. **metrics.md** — interpretation guides for code quality numbers
+
+**Why this approach:**
+- ✅ Extensible without code changes (add a new smell, Claude learns it)
+- ✅ Transparent (all rules are human-readable and editable)
+- ✅ Language-agnostic (same framework works for Python, Go, Java, etc.)
+- ✅ Easy to maintain (no compilation, no deployment pipeline)
+
+**Trade-off:** These files are carefully structured. Reorganizing sections or renaming patterns can confuse Claude because it learns position and phrasing. When editing, add new content; preserve existing structure.
 
 ## Language-Specific Considerations
 
@@ -100,38 +160,113 @@ Every refactoring analysis produces:
 ⚠️ Considerations (breaking changes, affected dependencies, migration steps)
 ```
 
-## Common Tasks
+## File Editing Patterns
+
+### 📝 Safe to Edit
+
+**[references/code-smells.md](references/code-smells.md)** — Expand the catalog
+- Add new universal problems or language-specific issues
+- Keep existing entries unchanged (Claude learns their structure)
+- Format: **Name** → description → example (❌ bad, ✅ good) → fix steps
+
+**[test-cases.json](test-cases.json)** — Grow the test suite
+- Add new `id`, `title`, `language`, `input`, `expected_issues`, `expected_improvements`
+- Validate with `python -m json.tool test-cases.json` before committing
+- Existing test cases: only fix if the expected issues/improvements are factually wrong
+
+**[CLAUDE.md](CLAUDE.md)** — Update development guidance
+- Document new workflows or file purposes
+- Clarify architecture as needed
+- Do not remove sections without reason (they guide future maintainers)
+
+### ⚠️ Edit with Care
+
+**[SKILL.md](SKILL.md)** — Defines Claude's execution model
+- Only modify if the 6-phase workflow needs restructuring
+- Frontmatter (name, description) should only change for releases
+- Examples in the sections guide Claude's reasoning—breaking them breaks detection
+
+**[references/design-patterns.md](references/design-patterns.md)** — Pattern reference
+- Add new patterns freely
+- Reorganizing existing patterns can confuse Claude (it's position-dependent)
+- Update when best practices for a pattern change (e.g., React Hooks replacing class patterns)
+
+**[references/metrics.md](references/metrics.md)** — Quality thresholds
+- Update when industry benchmarks change
+- Clarify metric interpretation as needed
+- Do not remove tools or sections (they guide detection)
+
+### ❌ Avoid
+
+- Deleting test cases (remove only if duplicates exist)
+- Renaming code smell categories (moves the problem, doesn't solve it)
+- Major restructuring of reference files (breaks Claude's cross-references)
+- Adding code examples to SKILL.md if examples already exist elsewhere
+
+## Common Development Tasks
 
 ### Adding a New Code Smell Pattern
 
-Edit [references/code-smells.md](references/code-smells.md):
-1. Determine if it's universal or language-specific
-2. Add it under the appropriate section
-3. Include: description, example, how to fix, why it matters
-4. Run validation to ensure file integrity
+1. Determine if **universal** (all languages) or **language-specific**
+2. Edit [references/code-smells.md](references/code-smells.md), add under the appropriate section:
+   
+   ```
+   ### Problem Name
+   **Description**: What the problem is  
+   **Impact**: Why it matters (maintainability, performance, security)  
+   **Example**:
+   ❌ Problematic code goes here
+   ✅ Fixed code goes here
+   
+   **How to fix**: Steps to resolve
+   ```
 
-### Adding a New Design Pattern Example
+3. Run `python3 scripts/validate.py` to verify file integrity
+4. Add a test case if this is a major new detection (optional but recommended)
 
-Edit [references/design-patterns.md](references/design-patterns.md):
-1. Identify the pattern category (Creational/Structural/Behavioral/SOLID)
-2. Add entry with: Name, When to use, Example, Advantages, When to apply, Before/after code
-3. Include language-specific variants if relevant
+### Adding a New Design Pattern
+
+1. Identify category: Creational / Structural / Behavioral / SOLID
+2. Edit [references/design-patterns.md](references/design-patterns.md), add entry with:
+   - **Name**
+   - **When to use**: Situations where this pattern applies
+   - **Example**: Real-world scenario
+   - **Advantages**: Why this pattern helps
+   - **When to apply**: Detection triggers (what code looks like before the pattern)
+   - **Code**: Before/after code example
+   - **Language notes**: Language-specific considerations (optional)
+3. Run `python3 scripts/validate.py`
 
 ### Adding Test Cases
 
-Edit [test-cases.json](test-cases.json):
-1. Create a new object with unique `id`
-2. Include required fields: `title`, `language`, `input`, `expected_issues`, `expected_improvements`
-3. Run validation to ensure JSON is valid
-4. Test manually with the skill to verify it detects expected issues
+1. Edit [test-cases.json](test-cases.json), append:
+   ```json
+   {
+     "id": "test_N_language_shortname",
+     "title": "Descriptive title",
+     "language": "python",
+     "input": "code with intentional issues",
+     "expected_issues": ["problem 1", "problem 2"],
+     "expected_improvements": ["fix 1", "fix 2"]
+   }
+   ```
+2. Validate: `python -m json.tool test-cases.json > /dev/null` (no output = valid)
+3. Test manually in Claude.ai by pasting the input code and running the skill
+4. Verify it detects all expected issues and suggests the expected improvements
 
-### Updating the Skill Definition
+### Updating SKILL.md
 
-Edit [SKILL.md](SKILL.md):
-1. Maintain the YAML frontmatter (name, description)
-2. Update sections as needed (workflow, modes, considerations)
-3. Keep examples and limitations up-to-date
-4. Ensure references section links are correct
+Only when the workflow itself changes. For example:
+- Adding a new phase (5-phase → 7-phase)
+- Changing how analysis dimensions work
+- Expanding or removing modes of use
+
+**To edit safely:**
+1. Keep the YAML frontmatter intact (name, description)
+2. Update section headers only if they align with the 6-phase model
+3. Keep language-specific considerations grouped
+4. Maintain examples for each section
+5. Run through a manual test case after editing
 
 ## Languages and Frameworks Covered
 
